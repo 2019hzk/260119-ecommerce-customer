@@ -50,12 +50,12 @@ flows:
       - id: ask
         type: action
         action: action_response
-        args: context.response
+        args: context.response   #  请告诉我你的订单号---->前端展示
         next: listen
 
       - id: listen
         type: action
-        action: action_listen
+        action: action_listen    # 引擎不能在向下执行（停止）---action_listen
         next: end
 
       - id: end
