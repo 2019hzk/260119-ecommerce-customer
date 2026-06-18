@@ -95,5 +95,8 @@ class BotMessage:
         )
 
 
-
-
+@dataclass(slots=True)
+class ProcessResult:
+    sender_id: str
+    message_id: str
+    messages: list[BotMessage]

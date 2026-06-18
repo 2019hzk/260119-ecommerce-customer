@@ -4,9 +4,6 @@ from pathlib import Path
 from atguigu.task.flow.flows import FlowsList, FlowSlot, Flow, FlowStep
 from atguigu.task.flow.steps import CollectFlowStep
 
-
-
-
 class FlowLoader:
 
     def load_many_yaml(self, paths: list[str | Path]) -> FlowsList:
