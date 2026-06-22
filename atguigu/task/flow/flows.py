@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from atguigu.task.flow.steps import FlowStep
 
 
@@ -8,6 +8,7 @@ class FlowSlot:
     type: str  # 槽位的类型
     label: str
     description: str
+
 
 @dataclass(slots=True)
 class Flow:
@@ -20,10 +21,11 @@ class Flow:
     steps: list[FlowStep] = field(default_factory=list)
     slots: dict[str, FlowSlot] = field(default_factory=dict)  # 将业务流程用到的槽位封装到Flow
 
+
 @dataclass(slots=True)
 class FlowsList:
     """
     一个结构表示两份yaml文件
     """
     flows: list[Flow] = field(default_factory=list)  # 两份yaml的flows内容
-    slots: dict[str,FlowSlot]=field(default_factory=dict)  # 两份yaml的slots内容
+    slots: dict[str, FlowSlot] = field(default_factory=dict)  # 两份yaml的slots内容
