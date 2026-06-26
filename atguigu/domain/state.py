@@ -225,13 +225,13 @@ class DialogueState:
         if self.active_task is not None:
             self.active_task.slots.update(slots)
 
-    def get_slot(self, slot_name: str) -> Any:
+    def remove_slot(self, slot_name: str) -> Any:
         """
         根据槽位名读取槽位的值
         :param slot_name:
         :return:
         """
-        return self.active_task.slots.get(slot_name)
+        return self.active_task.slots.pop(slot_name)
 
     # ==========================卡片相关==========================
 
