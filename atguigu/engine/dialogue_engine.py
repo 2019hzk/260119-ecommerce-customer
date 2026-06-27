@@ -59,7 +59,7 @@ class DialogueEngine:
             bot_msgs = await self._hand_text_msg(user_message,
                                                  state=state,
                                                  flow_list=self.task_handler.flow_list,
-                                                 intents=self.knowledge_handler.intents)
+                                                 intents=self.knowledge_handler.knowledge_intents)
 
 
         # 3.2 对象消息类型
@@ -151,7 +151,7 @@ class DialogueEngine:
         if turn_plan.task is not None:
             return await self.task_handler.hand(state, turn_plan.task.commands)
         elif turn_plan.knowledge is not None:
-            return await self.knowledge_handler.hand(state, self.knowledge_handler.intents)
+            return await self.knowledge_handler.hand(state,turn_plan.knowledge.intents)
         else:
             return await self.chitchat_handler.hand(state)
 
@@ -178,7 +178,7 @@ class DialogueEngine:
 
         # 2. 判断如果command存在
         if command:
-            await self.task_handler.hand(state, commands=[command])
+            return  await self.task_handler.hand(state, commands=[command])
 
         # 3. command不存在，流程是否存在
         # 3.1 流程如果存在,继续处理流程的当前step

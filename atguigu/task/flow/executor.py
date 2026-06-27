@@ -158,7 +158,7 @@ class FlowExecutor:
         """
         data = {
             "slots": state.active_task.slots,  # 支持条件表达式中可以写入变量叫slots （可选的支开关支持）
-            "context": asdict(state.active_system_task)
+            "context": asdict(state.active_system_task)  if state.active_system_task else {}
         }
         return eval(condition, {}, data)
 

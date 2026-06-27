@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any
-from enum import  Enum
+from enum import Enum
 
 from atguigu.task.command.commands import Command
 
@@ -25,8 +25,9 @@ class KnowledgeTurnPlan:
         return cls(intents=knowledge_data.get('intents', []))
 
 
+@dataclass
 class ChitChatTurnPlan:
-    pass
+    chat: str
 
 
 @dataclass
@@ -41,13 +42,11 @@ class TurnPlan:
             task=TaskTurnPlan.from_dict(turn_plan_data['task']) if turn_plan_data.get('task') else None,
             knowledge=KnowledgeTurnPlan.from_dict(turn_plan_data['knowledge']) if turn_plan_data.get(
                 'knowledge') else None,
-            chitchat=ChitChatTurnPlan() if turn_plan_data.get('chitchat') else None,
+            chitchat=ChitChatTurnPlan(chat=turn_plan_data.get('chitchat')) if turn_plan_data.get('chitchat') else None,
         )
 
-
-
     def activated_tracks(self):
-        tracks=[]
+        tracks = []
 
         if self.task is not None:
             tracks.append("task")
@@ -56,10 +55,7 @@ class TurnPlan:
         if self.chitchat is not None:
             tracks.append("chichat")
 
-
         return tracks
-
-
 
 
 class ClarifyReason(Enum):
@@ -81,4 +77,4 @@ class TurnPlanValidateResult:
     """
 
     valid: bool  # 校验通过或者失败
-    reason:ClarifyReason | None = None
+    reason: ClarifyReason | None = None

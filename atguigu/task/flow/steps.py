@@ -118,7 +118,7 @@ class CollectFlowStep(FlowStep):
             slot_name=collect_step_data.get('slot_name'),
             response=ResponseDefinition(
                 text=collect_step_data['response']['text'],
-                mode=collect_step_data['response'].get('mode'),
+                mode=collect_step_data['response'].get('mode','static'),
                 prompt=collect_step_data['response'].get('prompt')
             ),
             validate=SlotValidation(
