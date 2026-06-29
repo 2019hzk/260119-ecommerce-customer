@@ -206,13 +206,13 @@ class DialogueEngine:
         if obj_message.type == "order":
 
             if self._try_build_slots_command(state, flows, "order_number"):
-                return SetSlotsCommand(command="start_flow", slots={"order_number": obj_message.id})
+                return SetSlotsCommand(command="set_slots", slots={"order_number": obj_message.id})
 
             return None
 
         if obj_message.type == "product":
             if self._try_build_slots_command(state, flows, "product_id"):
-                SetSlotsCommand(command="start_flow", slots={"product_id": obj_message.id})
+                return SetSlotsCommand(command="set_slots", slots={"product_id": obj_message.id})
             return None
 
         return None

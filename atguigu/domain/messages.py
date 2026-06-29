@@ -2,7 +2,7 @@
 用户消息、机器消息数据模型
 """
 from enum import Enum
-from typing import Any, Self
+from typing import Any, Self, Literal
 from dataclasses import dataclass, field
 
 
@@ -100,3 +100,12 @@ class ProcessResult:
     sender_id: str
     message_id: str
     messages: list[BotMessage]
+
+
+
+@dataclass(slots=True)
+class ChatHistoryMessage:
+    session_id: str
+    role: Literal["user", "bot"]
+    text: str | None = None
+    object: FocusedObject | None = None

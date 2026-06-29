@@ -1,5 +1,7 @@
+from typing import Literal
+
 from atguigu.domain.state import Turn
-from atguigu.domain.messages import UserMessage, BotMessage, FocusedObject, MessageType
+from atguigu.domain.messages import UserMessage, BotMessage, FocusedObject, MessageType, ChatHistoryMessage
 
 
 class ChatHistoryBuilder:
@@ -58,3 +60,15 @@ class ChatHistoryBuilder:
         attributes_str = " ".join([f"{k}={v}" for k, v in object.attributes.items()])
 
         return f"[id={id} label={label} title={title} attributes={attributes_str}]"
+
+    @staticmethod
+    def build_chat_history(session_id: str,
+                           role: Literal["user", "bot"],
+                           text: str | None,
+                           object: FocusedObject | None):
+        return ChatHistoryMessage(
+            session_id=session_id,
+            role=role,
+            text=text,
+            object=object
+        )

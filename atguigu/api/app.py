@@ -4,6 +4,9 @@ from atguigu.api.router.chat_router import router
 from atguigu.infrastructure.db import init_db_engine, dispose_engine
 from atguigu.infrastructure.http_client import init_http_client, dispose_http_client
 from atguigu.api.dependencies import init_dialogue_engine
+from atguigu.infrastructure.avatar import init_avatar_client
+from atguigu.api.router.avatar_router import router as avatar_router
+from atguigu.api.router.avatar_ws_router import router as avatar_ws_router
 
 
 @asynccontextmanager
@@ -16,6 +19,7 @@ async def lifespan(app: FastAPI):
     await init_db_engine()
     init_http_client()
     init_dialogue_engine()
+    init_avatar_client()
     yield  # FASTAPI正常处理请求
 
     # 清理资源（应用关闭）
@@ -25,3 +29,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(description="智能客服V1.0", lifespan=lifespan)
 app.include_router(router)
+
+app.include_router(avatar_router)
+app.include_router(avatar_ws_router)

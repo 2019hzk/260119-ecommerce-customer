@@ -27,7 +27,6 @@ class TaskHandler:
         self.command_processor.run(state, self.flow_list, commands)
 
         # 2. 使用流程执行器推进流程
-
         bot_msgs: list[BotMessage] = await self.flow_executor.execute_flow(state, self.flow_list, self.action_runner)
 
         return bot_msgs
